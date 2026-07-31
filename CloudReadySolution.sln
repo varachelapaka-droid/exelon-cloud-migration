@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37328.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudReadySolution", "CloudReadySolution\CloudReadySolution.csproj", "{36CB2056-AC03-4F3F-BE88-3F132C3B30DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36CB2056-AC03-4F3F-BE88-3F132C3B30DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CB2056-AC03-4F3F-BE88-3F132C3B30DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CB2056-AC03-4F3F-BE88-3F132C3B30DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CB2056-AC03-4F3F-BE88-3F132C3B30DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C009B638-4004-4607-9BF1-3B334970F399}
+	EndGlobalSection
+EndGlobal
