@@ -1,0 +1,34 @@
+name: Build and Deploy .NET Framework App
+
+on:
+  push:
+    branches:
+      - main   # Trigger on pushes to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest   # Needed for .NET Framework
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Restore NuGet packages
+        run: nuget restore MvcCrudApp.sln
+
+      - name: Build with MSBuild
+        run: msbuild MvcCrudApp.sln /p:Configuration=Release
+
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: app-excert-dev
+          slot-name: production
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: MvcCrudApp/bin/Release
