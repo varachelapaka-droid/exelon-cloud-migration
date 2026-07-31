@@ -3,11 +3,11 @@ name: Build and Deploy .NET Framework App
 on:
   push:
     branches:
-      - main # Trigger on pushes to main branch
+      - main
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest   # Required for .NET Framework builds
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
@@ -19,11 +19,13 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
 
+      # Restore packages using the .csproj file
       - name: Restore NuGet packages
-        run: nuget restore src/CloudReadySolution.sln
+        run: nuget restore CloudReadySolution.csproj
 
+      # Build using the .csproj file
       - name: Build with MSBuild
-        run: msbuild src/CloudReadySolution.sln /p:Configuration=Release
+        run: msbuild CloudReadySolution.csproj /p:Configuration=Release
 
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
@@ -31,4 +33,4 @@ jobs:
           app-name: app-excert-dev
           slot-name: production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: src/CloudReadySolution/bin/Release
+          package: CloudReadySolution/bin/Release
