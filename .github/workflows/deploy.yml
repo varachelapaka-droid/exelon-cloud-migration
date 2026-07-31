@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest   # Needed for .NET Framework
+    runs-on: windows-latest   # Required for .NET Framework builds
 
     steps:
       - name: Checkout code
@@ -20,10 +20,10 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore NuGet packages
-        run: nuget restore CloudReadySolution.sln
+        run: nuget restore src/CloudReadySolution.sln
 
       - name: Build with MSBuild
-        run: msbuild CloudReadySolution.sln /p:Configuration=Release
+        run: msbuild src/CloudReadySolution.sln /p:Configuration=Release
 
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
@@ -31,4 +31,4 @@ jobs:
           app-name: app-excert-dev
           slot-name: production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: CloudReadySolution/bin/Release
+          package: src/CloudReadySolution/bin/Release
