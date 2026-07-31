@@ -3,11 +3,11 @@ name: Build and Deploy .NET Framework App
 on:
   push:
     branches:
-      - main
+      - main   # Trigger on pushes to main branch
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: windows-latest   # Required for .NET Framework builds
 
     steps:
       - name: Checkout code
@@ -19,13 +19,13 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
 
-      # Restore packages using the .csproj file
+      # Restore packages using the solution file
       - name: Restore NuGet packages
-        run: nuget restore CloudReadySolution.csproj
+        run: nuget restore CloudReadySolution.sln
 
-      # Build using the .csproj file
+      # Build using the solution file
       - name: Build with MSBuild
-        run: msbuild CloudReadySolution.csproj /p:Configuration=Release
+        run: msbuild CloudReadySolution.sln /p:Configuration=Release
 
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
